@@ -42,7 +42,21 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React development server
+    "http://localhost:5173",  # React development server
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
 ]
 
 # Database settings (SQLite)
@@ -72,7 +86,7 @@ TEMPLATES = [
 ]
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-your-secret-key-here'
+SECRET_KEY = 'django-not-so-secure-secret-key-here' # ideally, this should be stored in an .env file, lol
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
