@@ -8,6 +8,8 @@ from speakers.views import SpeakerProfileViewSet, SpeakerAvailabilityViewSet
 from groups.views import GroupViewSet, GroupMembershipViewSet
 from events.views import EventViewSet, EventRegistrationViewSet, MockPaymentViewSet
 
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'speakers', SpeakerProfileViewSet)
@@ -23,4 +25,8 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+
+    # swagger docs url
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 ]

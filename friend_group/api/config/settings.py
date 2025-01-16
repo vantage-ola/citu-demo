@@ -20,10 +20,21 @@ INSTALLED_APPS = [
     'groups',
     'events',
     'speakers',
+
+    # swagger docs
+    'drf_spectacular'
 ]
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Friend Group API',
+    'DESCRIPTION': 'API for managing friend groups, events, and speaker sessions',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
 
 # REST Framework settings
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
