@@ -14,6 +14,12 @@ class EventSerializer(serializers.ModelSerializer):
         fields = '__all__'
         read_only_fields = ('created_at', 'updated_at')
 
+    def create(self, validated_data):
+        # Set created_by to the current user if not provided
+        if 'created_by' not in validated_data:
+            validated_data['created_by'] = self.context['request'].user
+        return super().create(validated_data)
+
 class MockPaymentSerializer(serializers.ModelSerializer):
     class Meta:
         model = MockPayment
