@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-function App() {
-  const [count, setCount] = useState(0)
+import { AuthProvider } from './context/AuthContext';
+import Navbar from './components/Navbar';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
+import DashboardPage from './pages/DashboardPage';
+import SpeakerDirectoryPage from './pages/SpeakerDirectoryPage';
+import GroupManagementPage from './pages/GroupManagementPage';
+import EventManagementPage from './pages/EventManagementPage';
+import SpeakerProfilePage from './pages/SpeakerProfilePage';
+import EventDetailPage from './pages/EventDetailPage';
+import PaymentPage from './pages/PaymentPage';
+import UserProfilePage from './pages/UserProfilePage';
 
+const App: React.FC = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <AuthProvider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/speakers" element={<SpeakerDirectoryPage />} />
+          <Route path="/groups" element={<GroupManagementPage />} />
+          <Route path="/events" element={<EventManagementPage />} />
+          <Route path="/speaker/:id" element={<SpeakerProfilePage />} />
+          <Route path="/event/:id" element={<EventDetailPage />} />
+          <Route path="/payments" element={<PaymentPage />} />
+          <Route path="/profile" element={<UserProfilePage />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
+  );
+};
 
-export default App
+export default App;
