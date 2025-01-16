@@ -9,6 +9,12 @@ class GroupMembershipSerializer(serializers.ModelSerializer):
         model = GroupMembership
         fields = '__all__'
 
+    def create(self, validated_data):
+        # Set created_by to the current user if not provided
+        if 'created_by' not in validated_data:
+            validated_data['created_by'] = self.context['request'].user
+        return super().create(validated_data)
+
 class GroupSerializer(serializers.ModelSerializer):
     members = GroupMembershipSerializer(source='memberships', many=True, read_only=True)
 

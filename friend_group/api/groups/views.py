@@ -8,6 +8,10 @@ class GroupViewSet(viewsets.ModelViewSet):
     serializer_class = GroupSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        return context
+
 class GroupMembershipViewSet(viewsets.ModelViewSet):
     queryset = GroupMembership.objects.all()
     serializer_class = GroupMembershipSerializer
