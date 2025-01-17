@@ -21,6 +21,7 @@ const LoginPage: React.FC = () => {
 
       console.log('Login successful:', user);
       navigate('/dashboard');
+      location.reload()
     } catch (error) {
       console.error('Login failed:', error);
       alert('Invalid username or password. Please try again.');

@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { TextField, Button, Typography, Box } from '@mui/material';
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  Link,
+} from '@mui/material';
 
 interface LoginFormProps {
   onSubmit: (username: string, password: string) => void;
@@ -20,10 +26,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   };
 
   return (
-    <Box display="flex" flexDirection="column" alignItems="center" px={3}>
-      <Typography variant="h4" gutterBottom>
-        Log In
-      </Typography>
+    <Box>
       {error && (
         <Typography color="error" variant="body2">
           {error}
@@ -35,6 +38,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         fullWidth
+        required
         margin="normal"
       />
       <TextField
@@ -43,17 +47,25 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         fullWidth
+        required
         margin="normal"
       />
       <Button
+        type="submit"
         variant="contained"
         color="primary"
         onClick={handleSubmit}
         fullWidth
         sx={{ mt: 2 }}
       >
-        Log In
+        Login
       </Button>
+        <Typography textAlign="center" style={{ marginTop: '1em'}}>
+          Don't have an account?{' '}
+          <Link href="/signup" underline="hover">
+            Signup
+          </Link>
+        </Typography>
     </Box>
   );
 };

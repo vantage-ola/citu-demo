@@ -6,11 +6,11 @@ import { api } from '../services/API';
 const SignupPage: React.FC = () => {
   const navigate = useNavigate();
 
-  const handleSignup = async (username: string, email: string, password: string) => {
+  const handleSignup = async (username: string, email: string, password: string, is_speaker: boolean) => {
     try {
-      await api.signup(username, email, password);
+      await api.signup(username, email, password, is_speaker);
       alert('Signup successful! Please log in.');
-      navigate('/login'); // Redirect to login page
+      navigate('/'); // Redirect to login page
     } catch (error) {
       console.error('Signup failed:', error);
       alert('Signup failed. Please try again.');
