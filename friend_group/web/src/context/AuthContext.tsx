@@ -52,6 +52,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setUser(null);
     localStorage.removeItem('access');
     localStorage.removeItem('refresh');
+    window.location.href = ('/');
   };
 
   const isAuthenticated = !!user;
