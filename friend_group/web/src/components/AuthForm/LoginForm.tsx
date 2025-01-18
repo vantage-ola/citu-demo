@@ -5,7 +5,10 @@ import {
   Button,
   Typography,
   Link,
+  FormControl,
+  FormLabel,
 } from '@mui/material';
+import { Card } from '../Card/Card';
 
 interface LoginFormProps {
   onSubmit: (username: string, password: string) => void;
@@ -16,57 +19,93 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent form from submitting traditionally
+
     if (!username || !password) {
       setError('Username and password are required.');
       return;
     }
-    setError('');
+
+    setError(''); // Clear any previous errors
     onSubmit(username, password);
   };
 
   return (
-    <Box>
-      {error && (
-        <Typography color="error" variant="body2">
-          {error}
-        </Typography>
-      )}
-      <TextField
-        label="Username"
-        type="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        fullWidth
-        required
-        margin="normal"
-      />
-      <TextField
-        label="Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        fullWidth
-        required
-        margin="normal"
-      />
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        onClick={handleSubmit}
-        fullWidth
-        sx={{ mt: 2 }}
+    <Card variant="outlined">
+      <Typography
+        component="h1"
+        variant="h4"
+        sx={{ width: '100%', fontSize: 'clamp(2rem, 10vw, 2.15rem)' }}
       >
-        Login
-      </Button>
-        <Typography textAlign="center" style={{ marginTop: '1em'}}>
-          Don't have an account?{' '}
-          <Link href="/signup" underline="hover">
-            Signup
-          </Link>
-        </Typography>
-    </Box>
+        Sign in
+      </Typography>
+      <Box
+        component="form"
+        noValidate
+        onSubmit={handleSubmit}
+        sx={{ display: 'flex', flexDirection: 'column', width: '100%', gap: 2 }}
+      >
+        <FormControl>
+          <FormLabel htmlFor="username">Username</FormLabel>
+          <TextField
+            id="username"
+            type="text"
+            name="username"
+            placeholder="john.doe"
+            value={username}
+            autoComplete="username"
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            margin="normal"
+            autoFocus
+            fullWidth
+            variant="outlined"
+            error={!!error}
+          />
+        </FormControl>
+
+        <FormControl>
+          <FormLabel htmlFor="password">Password</FormLabel>
+          <TextField
+            id="password"
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+            required
+            margin="normal"
+            fullWidth
+            variant="outlined"
+            error={!!error}
+          />
+        </FormControl>
+
+        {error && (
+          <Typography color="error" variant="body2">
+            {error}
+          </Typography>
+        )}
+
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          sx={{ mt: 2 }}
+        >
+          Login
+        </Button>
+      </Box>
+
+      <Typography textAlign="center" style={{ marginTop: '1em'}}>
+        Don't have an account?{' '}
+        <Link href="/signup" underline="hover">
+          Signup
+        </Link>
+      </Typography>
+    </Card>
   );
 };
 
