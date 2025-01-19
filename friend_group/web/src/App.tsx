@@ -3,17 +3,17 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
-import LoginPage from './pages/LoginPage';
-import SignupPage from './pages/SignupPage';
+import LoginPage from './pages/authform/LoginPage';
+import SignupPage from './pages/authform/SignupPage';
 import DashboardPage from './pages/DashboardPage';
-import SpeakerDirectoryPage from './pages/SpeakerDirectoryPage';
-import GroupManagementPage from './pages/GroupManagementPage';
-import EventManagementPage from './pages/EventManagementPage';
-import SpeakerProfilePage from './pages/SpeakerProfilePage';
-import EventDetailPage from './pages/EventDetailPage';
-import PaymentPage from './pages/PaymentPage';
-import UserProfilePage from './pages/UserProfilePage';
-import GroupDetailPage from './pages/GroupDetailPage';
+import SpeakerDirectoryPage from './pages/speakers/SpeakerDirectoryPage';
+import GroupManagementPage from './pages/groups/GroupManagementPage';
+import EventManagementPage from './pages/events/EventManagementPage';
+import SpeakerProfilePage from './pages/speakers/SpeakerProfilePage';
+import EventDetailPage from './pages/events/EventDetailPage';
+import PaymentPage from './pages/payments/PaymentPage';
+import UserProfilePage from './pages/users/UserProfilePage';
+import GroupDetailPage from './pages/groups/GroupDetailPage';
 
 const App: React.FC = () => {
   return (
