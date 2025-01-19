@@ -5,6 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 const UserProfilePage: React.FC = () => {
   const { user } = useContext(AuthContext);
 
+  // If no user information is available, display an error message
   if (!user) {
     return (
       <Container sx={{ textAlign: 'center' }}>
