@@ -33,6 +33,7 @@ const GroupManagementPage: React.FC = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
 
+  // Function to open the modal
   const handleOpen = () => {
     setOpen(true);
     setError('');
@@ -40,11 +41,13 @@ const GroupManagementPage: React.FC = () => {
     setDescription('');
   };
 
+  // Function to close the modal
   const handleClose = () => {
     setOpen(false);
     setError('');
   };
 
+  // Fetch groups on component mount
   useEffect(() => {
     const fetchGroups = async () => {
       const data = await api.getGroups();
@@ -53,10 +56,12 @@ const GroupManagementPage: React.FC = () => {
     fetchGroups();
   }, []);
 
+  // Handle group click to navigate to group details
   const handleGroupClick = (groupId: number) => {
     navigate(`/groups/${groupId}`);
   };
 
+  // Handle form submission to create a new group
   const handleSubmit = async () => {
     if (!name.trim() || !description.trim()) {
       setError('Group name and Description are required.');
@@ -74,6 +79,7 @@ const GroupManagementPage: React.FC = () => {
     }
   };
 
+  // Filter groups based on search input
   const filteredGroups = groups.filter((group) =>
     group.name.toLowerCase().includes(groupName.toLowerCase())
   );
