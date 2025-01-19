@@ -78,10 +78,10 @@ export interface User {
   export interface MockPayment {
     id: number;
     event: number;
-    payer: User;
-    recipient: User;
+    payer: number;
+    recipient: number;
     amount: number;
-    status: 'PENDING' | 'COMPLETED' | 'FAILED' | 'REFUNDED';
+    status: string;
     transaction_id: string;
     created_at: string;
     updated_at: string;
