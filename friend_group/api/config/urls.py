@@ -10,6 +10,7 @@ from events.views import EventViewSet, EventRegistrationViewSet, MockPaymentView
 
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
+# Create a router and register our viewsets with it.
 router = DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'speakers', SpeakerProfileViewSet)
@@ -20,13 +21,14 @@ router.register(r'events', EventViewSet)
 router.register(r'event-registrations', EventRegistrationViewSet)
 router.register(r'payments', MockPaymentViewSet)
 
+# The API URLs are now determined automatically by the router.
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
-    # swagger docs url
+    # Swagger docs URL
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 ]

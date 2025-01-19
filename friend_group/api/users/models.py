@@ -2,6 +2,10 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class User(AbstractUser):
+    """
+    Custom user model extending the default Django user model.
+    Adds additional fields for speaker status, bio, and profile picture.
+    """
     is_speaker = models.BooleanField(default=False)
     bio = models.TextField(blank=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)

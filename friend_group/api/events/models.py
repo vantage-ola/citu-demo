@@ -2,6 +2,10 @@ from django.db import models
 from django.conf import settings
 
 class Event(models.Model):
+    """
+    Model representing an event.
+    Each event is associated with a group and optionally a speaker.
+    """
     STATUS_CHOICES = [
         ('DRAFT', 'Draft'),
         ('SCHEDULED', 'Scheduled'),
@@ -30,20 +34,26 @@ class Event(models.Model):
         return self.title
 
 class EventRegistration(models.Model):
+    """
+    Model representing an event registration.
+    Each registration is associated with an event and a user.
+    """
     event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name='registrations')
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='event_registrations')
     registered_at = models.DateTimeField(auto_now_add=True)
     attended = models.BooleanField(default=False)
 
     class Meta:
-        unique_together = ['event', 'user']
+        unique_together = ['event', 'user']  # Ensure unique registration per event and user
 
     def __str__(self):
         return f"{self.user.username} - {self.event.title}"
 
-
-
 class MockPayment(models.Model):
+    """
+    Model representing a mock payment.
+    Each payment is associated with an event, payer, and recipient.
+    """
     STATUS_CHOICES = [
         ('PENDING', 'Pending'),
         ('COMPLETED', 'Completed'),

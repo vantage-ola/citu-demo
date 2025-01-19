@@ -4,11 +4,19 @@ from .models import Event, EventRegistration, MockPayment
 from django.db import IntegrityError
 
 class EventRegistrationSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the EventRegistration model.
+    Converts EventRegistration model instances to JSON format and vice versa.
+    """
     class Meta:
         model = EventRegistration
         fields = '__all__'
 
 class EventSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Event model.
+    Includes nested serialization for registrations.
+    """
     registrations = EventRegistrationSerializer(many=True, read_only=True)
 
     class Meta:
@@ -17,19 +25,27 @@ class EventSerializer(serializers.ModelSerializer):
         read_only_fields = ('created_at', 'updated_at')
 
     def create(self, validated_data):
-        # Set created_by to the current user if not provided
+        """
+        Set created_by to the current user if not provided.
+        """
         if 'created_by' not in validated_data:
             validated_data['created_by'] = self.context['request'].user
         return super().create(validated_data)
 
 class MockPaymentSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the MockPayment model.
+    Generates a unique transaction ID for each payment.
+    """
     class Meta:
         model = MockPayment
         fields = '__all__'
         read_only_fields = ('created_at', 'updated_at', 'transaction_id')
 
     def create(self, validated_data):
-        # Keep trying until we get a unique transaction ID
+        """
+        Keep trying until we get a unique transaction ID.
+        """
         while True:
             try:
                 validated_data['transaction_id'] = f'TXN-{uuid.uuid4().hex[:12].upper()}'

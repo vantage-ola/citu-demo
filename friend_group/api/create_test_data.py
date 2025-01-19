@@ -17,6 +17,10 @@ from datetime import timedelta
 User = get_user_model()
 
 def create_test_data():
+    """
+    Function to create test data for the application.
+    Creates users, speaker profiles, groups, events, and mock payments.
+    """
     # Create regular users
     user1, created = User.objects.get_or_create(
         username='john_doe',
