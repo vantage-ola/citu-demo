@@ -1,0 +1,94 @@
+import React, { useState, useEffect, useContext } from 'react';
+import { api } from '../../services/API';
+import { MockPayment } from '../../utils/Types';
+import {
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  Box,
+  Chip,
+  CircularProgress,
+} from '@mui/material';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import { AuthContext } from '../../context/AuthContext';
+
+const PaymentPage: React.FC = () => {
+  const [payments, setPayments] = useState<MockPayment[]>([]);
+  const [loading, setLoading] = useState(true);
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetchPayments = async () => {
+      try {
+        const data = await api.getPayments();
+        if (user) {
+          const userPayments = data.filter(payment => payment.payer === user.id);
+          setPayments(userPayments);
+        }
+      } catch (error) {
+        console.error('Error fetching payments:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPayments();
+  }, [user]);
+
+  if (loading) {
+    return (
+      <Container sx={{ textAlign: 'center' }}>
+        <CircularProgress />
+        <Typography variant="h6" sx={{ mt: 1 }}>
+          Loading payment data...
+        </Typography>
+      </Container>
+    );
+  }
+
+  return (
+    <Container sx={{ p: 2 }}>
+      <Typography variant="h4" gutterBottom sx={{ fontWeight: 600, color: 'primary.main' }}>
+        Payments
+      </Typography>
+      <Box display="flex" flexDirection="column" gap="1rem">
+        {payments.map((payment) => (
+          <Card
+            key={payment.id}
+            elevation={3}
+            sx={{ borderRadius: 2, overflow: 'hidden', boxShadow: 1 }}
+          >
+            <CardContent>
+              <Box display="flex" alignItems="center" gap={1} mb={1}>
+                <AttachMoneyIcon color="primary" />
+                <Typography variant="h6" sx={{ fontWeight: 600 }}>
+                  Transaction ID: {payment.transaction_id}
+                </Typography>
+              </Box>
+              <Typography variant="body1" color="textSecondary">
+                Amount: <strong>${payment.amount}</strong>
+              </Typography>
+              <Box mt={1}>
+                <Chip
+                  label={payment.status}
+                  color={
+                    payment.status === 'COMPLETED'
+                      ? 'success'
+                      : payment.status === 'PENDING'
+                      ? 'warning'
+                      : payment.status === 'FAILED'
+                      ? 'error'
+                      : 'default'
+                  }
+                  size="small"
+                />
+              </Box>
+            </CardContent>
+          </Card>
+        ))}
+      </Box>
+    </Container>
+  );
+};
+
+export default PaymentPage;
