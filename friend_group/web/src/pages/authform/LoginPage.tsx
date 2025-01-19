@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import LoginForm from '../components/AuthForm/LoginForm';
+import LoginForm from '../../components/AuthForm/LoginForm';
 import { useNavigate } from 'react-router-dom';
-import { api } from '../services/API';
-import { AuthContext } from '../context/AuthContext';
+import { api } from '../../services/API';
+import { AuthContext } from '../../context/AuthContext';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();

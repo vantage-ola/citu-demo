@@ -1,7 +1,7 @@
 import React from 'react';
-import SignupForm from '../components/AuthForm/SignupForm';
+import SignupForm from '../../components/AuthForm/SignupForm';
 import { useNavigate } from 'react-router-dom';
-import { api } from '../services/API';
+import { api } from '../../services/API';
 
 const SignupPage: React.FC = () => {
   const navigate = useNavigate();
