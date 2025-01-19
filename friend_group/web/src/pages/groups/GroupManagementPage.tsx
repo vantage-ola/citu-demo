@@ -21,6 +21,7 @@ import {
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CloseIcon from '@mui/icons-material/Close';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { AuthContext } from '../../context/AuthContext';
 
 const GroupManagementPage: React.FC = () => {
@@ -86,6 +87,14 @@ const GroupManagementPage: React.FC = () => {
 
   return (
     <Container maxWidth="md" sx={{ mt: 'calc(var(--template-frame-height, 0px) + 28px)', p: 2 }}>
+      <Button
+        startIcon={<ArrowBackIcon />}
+        onClick={() => navigate('/dashboard')}
+        variant="text"
+        color="primary"
+        sx={{ mb: 2 }}
+      >
+      </Button>
       <Paper elevation={3} sx={{ p: 4, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
         <Typography variant="h4" gutterBottom sx={{ fontWeight: 600, textAlign: 'center', color: 'primary.main' }}>
           Manage Groups
