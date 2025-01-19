@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { api } from '../../services/API';
 import { SpeakerProfile } from '../../utils/Types';
-import { Container, Typography, Card, CardContent, CircularProgress, Box } from '@mui/material';
+import { Container, Typography, Card, CardContent, CircularProgress, Box, Button } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const SpeakerProfilePage: React.FC = () => {
+  const navigate = useNavigate();
+
   const { id } = useParams<{ id: string }>();
   const [speaker, setSpeaker] = useState<SpeakerProfile | null>(null);
   const [loading, setLoading] = useState(true);
@@ -47,6 +51,13 @@ const SpeakerProfilePage: React.FC = () => {
 
   return (
     <Container maxWidth="sm" sx={{ p: 2 }}>
+      <Button
+        startIcon={<ArrowBackIcon />}
+        onClick={() => navigate('/speakers')}
+        variant="text"
+        color="primary"
+        sx={{ mb: 2 }}
+      ></Button>
       <Typography variant="h4" gutterBottom sx={{ fontWeight: 600, color: 'primary.main' }}>
         {speaker?.user.username}'s Profile
       </Typography>

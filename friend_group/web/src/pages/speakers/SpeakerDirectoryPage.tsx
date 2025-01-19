@@ -14,6 +14,7 @@ import {
   Chip,
   Paper,
   IconButton,
+  Button
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -21,6 +22,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const SpeakerDirectoryPage: React.FC = () => {
   const navigate = useNavigate();
@@ -47,6 +49,13 @@ const SpeakerDirectoryPage: React.FC = () => {
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Button
+        startIcon={<ArrowBackIcon />}
+        onClick={() => navigate('/dashboard')}
+        variant="text"
+        color="primary"
+        sx={{ mb: 2 }}
+      ></Button>
       <Paper elevation={0} sx={{ p: 4, backgroundColor: '#f5f5f5', mb: 4, borderRadius: 2 }}>
         <Typography variant="h4" gutterBottom fontWeight="bold" color="primary">
           Speaker Directory
