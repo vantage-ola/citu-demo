@@ -24,8 +24,8 @@ class Api {
     return response.data;
   }
 
-  async signup(username: string, email: string, password: string) {
-    const response = await this.axios.post('/users/', { username, email, password });
+  async signup(username: string, email: string, password: string, is_speaker: boolean) {
+    const response = await this.axios.post('/users/', { username, email, password, is_speaker });
     return response.data;
   }
 
@@ -56,14 +56,19 @@ class Api {
     return response.data;
   }
 
+  async createSpeakerProfile( expertise: string, hourly_rate: number, location: string) {
+   const response = await this.axios.post<SpeakerProfile>('/speakers/', { expertise, hourly_rate, location, available_online: true});
+   return response.data;
+  }
+
   // Groups endpoints
   async getGroups() {
     const response = await this.axios.get<Group[]>('/groups/');
     return response.data;
   }
 
-  async createGroup(data: Partial<Group>) {
-    const response = await this.axios.post<Group>('/groups/', data);
+  async createGroup(name: string, description: string, created_by: number) {
+    const response = await this.axios.post<Group>('/groups/', { name, description, created_by });
     return response.data;
   }
 
@@ -72,14 +77,29 @@ class Api {
     return response.data;
   }
 
+
+  async joinGroup(group: number) {
+    const response = await this.axios.post('/group-memberships/', { group, role: "MEMBER" });
+    return response.data
+  }
   // Events endpoints
   async getEvents() {
     const response = await this.axios.get<Event[]>('/events/');
     return response.data;
   }
 
-  async createEvent(data: Partial<Event>) {
-    const response = await this.axios.post<Event>('/events/', data);
+  async createEvent(
+      title: string,
+      description: string,
+      group: number,
+      date: string,
+      start_time: string,
+      end_time: string,
+      location: string,
+      created_by: number
+
+  ) {
+    const response = await this.axios.post<Event>('/events/', {title, description, group, date, start_time, end_time, location, created_by});
     return response.data;
   }
 
@@ -89,10 +109,15 @@ class Api {
   }
 
   // Event registrations endpoints
-  async registerForEvent(eventId: number) {
+  async registerForEvent(user_id: number, event_id: number) {
     const response = await this.axios.post<EventRegistration>('/event-registrations/', {
-      event: eventId,
+      user: user_id, event: event_id
     });
+    return response.data;
+  }
+
+  async getEventRegistrations() {
+    const response = await this.axios.get<EventRegistration[]>('/event-registrations/');
     return response.data;
   }
 
