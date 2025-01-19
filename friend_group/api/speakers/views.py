@@ -8,6 +8,9 @@ class SpeakerProfileViewSet(viewsets.ModelViewSet):
     serializer_class = SpeakerProfileSerializer
     permission_classes = [IsAuthenticated]
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
 class SpeakerAvailabilityViewSet(viewsets.ModelViewSet):
     queryset = SpeakerAvailability.objects.all()
     serializer_class = SpeakerAvailabilitySerializer

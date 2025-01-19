@@ -7,12 +7,12 @@ class GroupMembershipSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = GroupMembership
-        fields = '__all__'
+        fields = ['id', 'user', 'group', 'role', 'joined_at', 'is_active']
+        read_only_fields = ['joined_at', 'user']
 
     def create(self, validated_data):
-        # Set created_by to the current user if not provided
-        if 'created_by' not in validated_data:
-            validated_data['created_by'] = self.context['request'].user
+        # Set the current user as the user for the membership
+        validated_data['user'] = self.context['request'].user
         return super().create(validated_data)
 
 class GroupSerializer(serializers.ModelSerializer):
