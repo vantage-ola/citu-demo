@@ -67,7 +67,10 @@ python3 manage.py createsuperuser
 ```
 python3 manage.py runserver
 ```
-
+7. Run test:
+```
+python3 pytest
+```
 ### Frontend Setup
 1. Navigate to the frontend directory
 ```
@@ -80,6 +83,10 @@ npm install
 3. Start the development server
 ```
 npm run dev
+```
+4. Run tests
+```
+npm test
 ```
 
 ## Testing the API
@@ -231,20 +238,7 @@ This project aimed to create a web application for friend groups to organize edu
 2. **Requirements Clarity**
    - Challenge: Unclear understanding of some feature requirements
    - Solution: Made assumptions and built flexible foundations that could be adapted
-   - Learning: Importance of detailed requirement gathering and user stories
-
-## Learning Outcomes
-
-### Technical Skills
-- Gained practical experience with Django REST Framework
-- Improved understanding of JWT authentication implementation
-- First-time experience with Material UI
-- Enhanced knowledge of React state management
-
-### Development Process
-- Better appreciation for the importance of design specifications
-- Understanding of modular backend architecture
-- Experience with Docker containerization
+   - Learning: Importance of detailed requirement gathering and user storie
 
 ## Areas for Improvement
 
@@ -256,10 +250,10 @@ This project aimed to create a web application for friend groups to organize edu
 
 ### Technical Implementation
 - Could enhance with:
-  - More comprehensive test coverage
+  - More comprehensive test coverage especially with the
   - Advanced filtering and search capabilities
   - Real-time notifications
   - More sophisticated event management features
 
 ## Conclusion
-While the project presented challenges in terms of design direction and technical implementation, it served as a valuable learning experience. The combination of new technologies (Material UI) and frameworks (Django REST Framework) provided opportunities for skill development. Future projects would benefit from more detailed initial planning and design phases, but the current implementation provides a solid foundation for future enhancements.
+While the project presented challenges in terms of design direction and technical implementation, it served as a valuable learning experience.
