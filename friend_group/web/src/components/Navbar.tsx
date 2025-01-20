@@ -36,7 +36,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }: { theme: any }) => ({
 }));
 
 const Navbar: React.FC = () => {
-  const { isAuthenticated, logout } = useContext(AuthContext);
+  const { isAuthenticated, logout, user } = useContext(AuthContext);
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -92,6 +92,17 @@ const Navbar: React.FC = () => {
                   >
                     Payments
                   </Button>
+                  {user && user.is_speaker && (
+                    <Button
+                      component={Link}
+                      to="/available"
+                      variant="text"
+                      color="info"
+                      size="small"
+                    >
+                      Availability
+                    </Button>
+                  )}
                 </>
               ) : null}
             </Box>
@@ -174,6 +185,9 @@ const Navbar: React.FC = () => {
                     <MenuItem component={Link} to="/dashboard">Dashboard</MenuItem>
                     <MenuItem component={Link} to="/profile">Profile</MenuItem>
                     <MenuItem component={Link} to="/payments">Payments</MenuItem>
+                    {user && user.is_speaker && (
+                      <MenuItem component={Link} to="/available">Availability</MenuItem>
+                    )}
                     <Divider sx={{ my: 3 }} />
                     <MenuItem>
                       <Button

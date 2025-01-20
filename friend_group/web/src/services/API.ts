@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Event, EventRegistration, Group, MockPayment, SpeakerProfile, User } from '../utils/Types';
+import { Event, EventRegistration, Group, MockPayment, SpeakerAvailability, SpeakerProfile, User } from '../utils/Types';
 
 const BASE_URL = 'http://localhost:8000/api';
 
@@ -67,6 +67,37 @@ class Api {
   async createSpeakerProfile( expertise: string, hourly_rate: number, location: string) {
    const response = await this.axios.post<SpeakerProfile>('/speakers/', { expertise, hourly_rate, location, available_online: true});
    return response.data;
+  }
+  // Speakers Availability
+
+  // Create/set the speaker availability
+  async CreateSpeakerAvailabilty(date: string, start_time: string, end_time: string, is_available: boolean, speaker: number) {
+    const response = await this.axios.post('/speaker-availability/', {
+      date,
+      start_time,
+      end_time,
+      is_available,
+      speaker
+    });
+    return response.data;
+  }
+
+  async GetSpeakerAvailability(){
+    const response = await this.axios.get<SpeakerAvailability[]>('/speaker-availability/')
+    return response;
+  }
+
+  async EditSpeakerAvailability(id: number, date: string, start_time: string, end_time: string, is_available: boolean, speaker: number){
+    const response = await this.axios.put<SpeakerAvailability>(`/speaker-availability/${id}/`,
+      {
+        date,
+        start_time,
+        end_time,
+        is_available,
+        speaker
+      }
+    )
+    return response.data;
   }
 
   // Groups endpoints

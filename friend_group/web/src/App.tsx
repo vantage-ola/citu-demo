@@ -14,6 +14,7 @@ import EventDetailPage from './pages/events/EventDetailPage';
 import PaymentPage from './pages/payments/PaymentPage';
 import UserProfilePage from './pages/users/UserProfilePage';
 import GroupDetailPage from './pages/groups/GroupDetailPage';
+import SpeakerAvailabilityPage from './pages/speakers/SpeakerAvailabilityPage';
 
 const App: React.FC = () => {
   return (
@@ -32,6 +33,7 @@ const App: React.FC = () => {
           <Route path="/events/:id" element={<EventDetailPage />} />
           <Route path="/payments" element={<PaymentPage />} />
           <Route path="/profile" element={<UserProfilePage />} />
+          <Route path="/available" element={<SpeakerAvailabilityPage/>}/>
         </Routes>
       </Router>
     </AuthProvider>

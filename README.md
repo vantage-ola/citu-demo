@@ -1,6 +1,8 @@
 # citu-demo assessment
 
-A web application that enables friend groups to reconnect and learn together by organizing educational events and workshops.
+A web application that enables friend groups to reconnect and learn together by organizing events and workshops. The platform will allow these groups to organize and schedule meaningful
+events centered around activities like guest lectures or workshops, avoiding common focuses
+such as alcohol, drugs, partying, or food.
 
 ## Features
 - User Authentication(Group Members and Speakers)
