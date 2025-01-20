@@ -299,7 +299,12 @@ const DashboardPage: React.FC = () => {
             label="Hourly Rate ($ per hour)"
             type="number"
             value={formData.hourly_rate}
-            onChange={(e) => setFormData({ ...formData, hourly_rate: Number(e.target.value) })}
+            onChange={(e) => {
+              const value = Number(e.target.value);
+              if (value >= 1){
+              setFormData({ ...formData, hourly_rate: value});
+            }
+          }}
             fullWidth
             required
             margin="normal"

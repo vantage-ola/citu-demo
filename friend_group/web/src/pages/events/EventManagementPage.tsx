@@ -23,6 +23,7 @@ import {
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import EventNoteIcon from '@mui/icons-material/EventNote';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { AuthContext } from '../../context/AuthContext';
 import { Group} from '../../utils/Types';
 
@@ -107,6 +108,13 @@ const EventManagementPage: React.FC = () => {
 
   return (
     <Container maxWidth="md" sx={{ mt: 'calc(var(--template-frame-height, 0px) + 28px)', p: 2 }}>
+      <Button
+        startIcon={<ArrowBackIcon />}
+        onClick={() => navigate('/dashboard')}
+        variant="text"
+        color="primary"
+        sx={{ mb: 2 }}
+      ></Button>
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
         <Typography variant="h4" sx={{ fontWeight: 600, color: 'primary.main' }}>
           Manage Events

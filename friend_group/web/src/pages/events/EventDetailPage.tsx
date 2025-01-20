@@ -155,14 +155,19 @@ const EventDetailPage: React.FC = () => {
             Donate to this Event
           </Typography>
           <TextField
-            label="Amount"
-            type="number"
-            variant="standard"
-            value={amount}
-            onChange={(e) => setAmount(Number(e.target.value))}
-            fullWidth
-            sx={{ mb: 2 }}
-          />
+              label="Amount"
+              type="number"
+              variant="standard"
+              value={amount}
+              onChange={(e) => {
+                const value = Number(e.target.value);
+                if (value >= 1) {
+                  setAmount(value);
+                }
+              }}
+              fullWidth
+              sx={{ mb: 2 }}
+            />
           <Button
             onClick={handlePayment}
             variant="contained"
